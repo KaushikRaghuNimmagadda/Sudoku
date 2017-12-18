@@ -11,8 +11,7 @@ int solveSudoku(Board board){
   // location now contains the row and col of an empty space
   // loop over all possible values
   for(int val = 1; val < DIM + 1; val ++){
-    if(isSafe(board, location, val)){
-      board[location.row][location.col] = val;
+    if(isSafe(board, location, val)){board[location.row][location.col] = val;
       // if we can solve the board with the updated value
       // return 1
       if(solveSudoku(board)){
@@ -85,4 +84,14 @@ void printBoard(Board board, std::ostream& output){
     }
     output << std::endl;
   }
+}
+
+int main(int argc, char *argv[]){
+  if(argc != 2){
+    std::cerr << "Usage: ./solver 'sudoku_file'" << std::endl;
+    std::cerr << "Output will be written to 'solved_sudoku_file'" << std::endl;
+    return 1;
+  }
+  std::cout << "DONE" << std::endl;
+  return 0;
 }

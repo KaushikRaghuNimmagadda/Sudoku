@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <iostream>
 
-
 #define EMPTY 0
 
 // this must be a square number
