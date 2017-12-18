@@ -1,27 +1,34 @@
 #include <stdio.h>
-#include <assert.h>
+#include <iostream>
+
 
 #define EMPTY 0
 
+// this must be a square number
 #define DIM 9
 
-typedef int BOARD[DIM][DIM];
+// define board, indexed as [row][col]
+typedef int Board[DIM][DIM];
 
 typedef struct loc {
   int row;
   int col;
 } loc;
 
-int isSafe(BOARD board, loc location, int val);
+int isSafe(Board board, loc location, int val);
 
-int inCol(BOARD board, int col, int val);
+int inCol(Board board, int col, int val);
 
-int inRow(BOARD board, int row, int val);
+int inRow(Board board, int row, int val);
 
-int inBox(BOARD board, loc location, int val);
+// the location is the box's starting row and col
+int inBox(Board board, loc location, int val);
 
 // takes in a board and a pointer to a loc struct.
 // updates that pointer to contain the location of
 // the next empty board square if there is one, returns
 // null otherwise
-loc *getEmptyLocation(BOARD board, loc *ptr);
+loc *getEmptyLocation(Board board, loc *ptr);
+
+// prints out the board to the output stream passed in
+void printBoard(Board board, std::ostream& output);
