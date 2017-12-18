@@ -15,6 +15,10 @@ typedef struct loc {
   int col;
 } loc;
 
+// attempts to solve a give sudoku board. If it's solvable, 1 is returned
+// and board is correctly filled in. Otherwise, 0 is returned.
+int solveSudoku(Board board);
+
 int isSafe(Board board, loc location, int val);
 
 int inCol(Board board, int col, int val);
