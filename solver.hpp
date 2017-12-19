@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <boost/array.hpp>
 
@@ -19,7 +20,7 @@ typedef struct loc {
 
 // attempts to solve a give sudoku board. If it's solvable, 1 is returned
 // and board is correctly filled in. Otherwise, 0 is returned.
-int solveSudoku(Board board);
+int solveSudoku(Board *board);
 
 int isSafe(Board board, loc location, int val);
 
@@ -38,3 +39,5 @@ loc *getEmptyLocation(Board board, loc *ptr);
 
 // prints out the board to the output stream passed in
 void printBoard(Board board, std::ostream& output);
+
+Board loadBoard(std::ifstream& source);

@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -Wall -g
+CXXFLAGS = -g -std=c++11
 EXEC = solver
 
 LIBS = -I/usr/local/boost_1_66_0
@@ -9,8 +9,8 @@ all: $(EXEC)
 clean:
 	rm -f $(EXEC) fake
 
-fake:
-	$(CXX) main.cpp solver.cpp $(LIBS) -o fake
+fake: main.cpp solver.cpp solver.hpp
+	$(CXX) $(CXXFLAGS) main.cpp solver.cpp $(LIBS) -o fake
 
 .PHONY: all clean
 

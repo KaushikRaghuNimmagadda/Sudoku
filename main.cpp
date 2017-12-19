@@ -15,17 +15,26 @@ Board ARR =
                   0, 0, 5, 2, 0, 6, 3, 0, 0};
 
 int main(int argc, char *argv[]){
-  T test = {1, 2, 3, 4, 5, 6};
-  for(int i = 1; i < argc; i ++){
-    std::cout << argv[i] << std::endl;
+  // T test = {1, 2, 3, 4, 5, 6};
+  // for(int i = 1; i < argc; i ++){
+  //   std::cout << argv[i] << std::endl;
+  // }
+  // for(int i = 0; i < 2; i ++){
+  //   for(int j = 0; j < 3; j ++){
+  //     std::cout << test[i][j] << std::endl;
+  //   }
+  // }
+  // printBoard(ARR, std::cout);
+  std::ifstream ifs;
+  ifs.open("test_board.txt");
+  Board b = loadBoard(ifs);
+  printBoard(b, std::cout);
+  if(solveSudoku(&b)){
+    std::cout << std::endl;
+    printBoard(b, std::cout);
+  } else {
+    std::cout << "Board not solvable" << std::endl;
   }
-  for(int i = 0; i < 2; i ++){
-    for(int j = 0; j < 3; j ++){
-      std::cout << test[i][j] << std::endl;
-    }
-  }
-
-  printBoard(ARR, std::cout);
   std::cout << "DONE" << std::endl;
   return 0;
 }
