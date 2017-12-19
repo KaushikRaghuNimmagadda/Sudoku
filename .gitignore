@@ -2,3 +2,5 @@
 *.out
 *.gch
 *.swp
+fake
+solver

@@ -7,7 +7,10 @@ LIBS = -I/usr/local/boost_1_66_0
 all: $(EXEC)
 
 clean:
-	rm -f $(EXEC)
+	rm -f $(EXEC) fake
+
+fake:
+	$(CXX) main.cpp solver.cpp $(LIBS) -o fake
 
 .PHONY: all clean
 
