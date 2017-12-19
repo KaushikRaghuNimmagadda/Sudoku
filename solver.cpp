@@ -1,4 +1,4 @@
-#include "solver.h"
+#include "solver.hpp"
 #include "math.h"
 #include "assert.h"
 
@@ -86,7 +86,7 @@ void printBoard(Board board, std::ostream& output){
   }
 }
 
-int main(int argc, char *argv[]){
+int main2(int argc, char *argv[]){
   if(argc != 2){
     std::cerr << "Usage: ./solver 'sudoku_file'" << std::endl;
     std::cerr << "Output will be written to 'solved_sudoku_file'" << std::endl;

@@ -2,6 +2,8 @@ CXX = g++
 CXXFLAGS = -Wall -g
 EXEC = solver
 
+LIBS = -I/usr/local/boost_1_66_0
+
 all: $(EXEC)
 
 clean:

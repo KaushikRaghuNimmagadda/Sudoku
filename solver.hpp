@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <iostream>
+#include <vector>
+#include <boost/array.hpp>
+
 
 #define EMPTY 0
 
@@ -7,7 +10,7 @@
 #define DIM 9
 
 // define board, indexed as [row][col]
-typedef int Board[DIM][DIM];
+typedef boost::array<boost::array<int, DIM>, DIM> Board;
 
 typedef struct loc {
   int row;
