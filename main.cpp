@@ -1,4 +1,5 @@
 #include "solver.hpp"
+#include "assert.h"
 
 typedef boost::array<boost::array<int, 3>, 2> T;
 
@@ -25,14 +26,21 @@ int main(int argc, char *argv[]){
   //   }
   // }
   // printBoard(ARR, std::cout);
+  if(argc != 2){
+    std::cout << "please supply the name of the board file as input."
+              << std::endl;
+    return 1;
+  }
   std::ifstream ifs;
-  ifs.open("test_board.txt");
+  ifs.open(argv[1]);
   Board b = loadBoard(ifs);
   printBoard(b, std::cout);
-  if(solveSudoku(&b)){
+  if(solveSudoku(b)){
+    assert(verifyBoard(b));
     std::cout << std::endl;
     printBoard(b, std::cout);
   } else {
+    assert(!verifyBoard(b));
     std::cout << "Board not solvable" << std::endl;
   }
   std::cout << "DONE" << std::endl;

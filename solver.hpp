@@ -11,6 +11,7 @@
 #define DIM 9
 
 // define board, indexed as [row][col]
+// maybe should switch this to a multiarray
 typedef boost::array<boost::array<int, DIM>, DIM> Board;
 
 typedef struct loc {
@@ -20,7 +21,7 @@ typedef struct loc {
 
 // attempts to solve a give sudoku board. If it's solvable, 1 is returned
 // and board is correctly filled in. Otherwise, 0 is returned.
-int solveSudoku(Board *board);
+int solveSudoku(Board& board);
 
 int isSafe(Board board, loc location, int val);
 
@@ -40,4 +41,9 @@ loc *getEmptyLocation(Board board, loc *ptr);
 // prints out the board to the output stream passed in
 void printBoard(Board board, std::ostream& output);
 
+// loads board from file stream
 Board loadBoard(std::ifstream& source);
+
+// takes in a board and checks if it is solved.
+// returns 1 if the board is solved and 0 if it isn't.
+int verifyBoard(Board board);
