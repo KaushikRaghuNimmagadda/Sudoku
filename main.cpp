@@ -1,9 +1,6 @@
 #include "solver.hpp"
 #include "assert.h"
 
-typedef boost::array<boost::array<int, 3>, 2> T;
-
-
 Board ARR =
   {3, 0, 6, 5, 0, 8, 4, 0, 0,
     5, 2, 0, 0, 0, 0, 0, 0, 0,
@@ -16,16 +13,6 @@ Board ARR =
                   0, 0, 5, 2, 0, 6, 3, 0, 0};
 
 int main(int argc, char *argv[]){
-  // T test = {1, 2, 3, 4, 5, 6};
-  // for(int i = 1; i < argc; i ++){
-  //   std::cout << argv[i] << std::endl;
-  // }
-  // for(int i = 0; i < 2; i ++){
-  //   for(int j = 0; j < 3; j ++){
-  //     std::cout << test[i][j] << std::endl;
-  //   }
-  // }
-  // printBoard(ARR, std::cout);
   if(argc != 2){
     std::cout << "please supply the name of the board file as input."
               << std::endl;
