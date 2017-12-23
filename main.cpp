@@ -1,6 +1,6 @@
 #include "solver.hpp"
+#include "generator.hpp"
 #include "assert.h"
-
 Board ARR =
   {3, 0, 6, 5, 0, 8, 4, 0, 0,
     5, 2, 0, 0, 0, 0, 0, 0, 0,
@@ -30,6 +30,8 @@ int main(int argc, char *argv[]){
   } else {
     std::cout << "Board not solvable" << std::endl;
   }
+  std::cout << std::endl;
+  printBoard(makeSolved(), std::cout);
   std::cout << "DONE" << std::endl;
   return 0;
 }

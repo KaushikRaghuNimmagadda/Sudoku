@@ -1,3 +1,6 @@
+#ifndef GENERATOR_H
+#define GENERATOR_H
+
 #include "board.hpp"
 #include "solver.hpp"
 
@@ -9,3 +12,5 @@ Board makeSudoku(Difficulty dif);
 
 // produces a filled in sudoku board
 Board makeSolved();
+
+#endif

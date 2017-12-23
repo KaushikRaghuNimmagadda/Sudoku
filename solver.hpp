@@ -1,3 +1,6 @@
+#ifndef SOLVER_H
+#define SOLVER_H
+
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
@@ -29,3 +32,5 @@ loc *getEmptyLocation(Board board, loc *ptr);
 // takes in a board and checks if it is solved.
 // returns 1 if the board is solved and 0 if it isn't.
 int verifyBoard(Board board);
+
+#endif
