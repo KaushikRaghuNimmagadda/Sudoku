@@ -8,6 +8,9 @@
 // and board is correctly filled in. Otherwise, 0 is returned.
 int solveSudoku(Board& board);
 
+// counts the number of possible solutions to a given sudoku board
+int countSolutions(Board& board);
+
 int isSafe(Board board, loc location, int val);
 
 int inCol(Board board, int col, int val);

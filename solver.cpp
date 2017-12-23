@@ -29,6 +29,28 @@ int solveSudoku(Board& board){
   return 0;
 }
 
+void countHelper(Board& board, int *count){
+  loc location;
+  if(!getEmptyLocation(board, &location)){
+    // board is solved, increment the number of solutions
+    (*count)++;
+    return;
+  }
+  for(int val = 1; val <= DIM; val ++){
+    if(isSafe(board, location, val)){
+      board[location.row][location.col] = val;
+      countHelper(board, count);
+      board[location.row][location.col] = EMPTY;
+    }
+  }
+}
+
+int countSolutions(Board& board){
+  int count = 0;
+  countHelper(board, &count);
+  return count;
+}
+
 loc *getEmptyLocation(Board board, loc *ptr){
   for(int i = 0; i < DIM; i ++){
     for(int j = 0; j < DIM; j ++){
