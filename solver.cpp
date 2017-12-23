@@ -1,8 +1,23 @@
 #include <string>
 #include <sstream>
+#include <vector>
+#include <algorithm>
+#include <boost/range/irange.hpp>
+#include <boost/range/algorithm_ext/push_back.hpp>
 #include "solver.hpp"
 #include "math.h"
 #include "assert.h"
+
+// produces a vector containing the values lower to upper not including
+// upper in some random order.
+std::vector<int> getShuffledVals(int lower, int upper){
+  assert(upper > lower);
+  std::vector<int> vals(upper - lower);
+  std::mt19937 r{std::random_device{}()};
+  boost::push_back(vals, boost::irange(lower, upper));
+  std::shuffle(std::begin(vals), std::end(vals), r);
+  return vals;
+}
 
 int solveSudoku(Board& board){
   loc location;
@@ -12,7 +27,10 @@ int solveSudoku(Board& board){
   }
   // location now contains the row and col of an empty space
   // loop over all possible values to fill space with
-  for(int val = 1; val <= DIM; val ++){
+
+  // using this to iterate through values in a random order
+  std::vector<int> vals = getShuffledVals(1, DIM + 1);
+  for(int val : vals){
     if(isSafe(board, location, val)){
       board[location.row][location.col] = val;
       // if we can solve the board with the updated value

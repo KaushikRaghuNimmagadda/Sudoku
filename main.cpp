@@ -22,7 +22,7 @@ int main(int argc, char *argv[]){
   ifs.open(argv[1]);
   Board b = loadBoard(ifs);
   printBoard(b, std::cout);
-  std::cout << "num solutions: " << countSolutions(b) << std::endl;
+  // std::cout << "num solutions: " << countSolutions(b) << std::endl;
   if(solveSudoku(b)){
     assert(verifyBoard(b));
     std::cout << std::endl;
