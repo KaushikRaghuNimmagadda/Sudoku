@@ -12,6 +12,8 @@
 int solveSudoku(Board& board);
 
 // counts the number of possible solutions to a given sudoku board
+// while the board is modified during this function it is always returned
+// to its original state when the initial call is done.
 int countSolutions(Board& board);
 
 int isSafe(Board board, loc location, int val);

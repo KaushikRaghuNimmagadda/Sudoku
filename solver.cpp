@@ -47,11 +47,11 @@ int solveSudoku(Board& board){
   return 0;
 }
 
-void countHelper(Board& board, int *count){
+void countHelper(Board& board, int& count){
   loc location;
   if(!getEmptyLocation(board, &location)){
     // board is solved, increment the number of solutions
-    (*count)++;
+    count++;
     return;
   }
   for(int val = 1; val <= DIM; val ++){
@@ -65,7 +65,7 @@ void countHelper(Board& board, int *count){
 
 int countSolutions(Board& board){
   int count = 0;
-  countHelper(board, &count);
+  countHelper(board, count);
   return count;
 }
 

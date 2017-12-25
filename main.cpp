@@ -22,7 +22,8 @@ int main(int argc, char *argv[]){
   ifs.open(argv[1]);
   Board b = loadBoard(ifs);
   printBoard(b, std::cout);
-  // std::cout << "num solutions: " << countSolutions(b) << std::endl;
+  std::cout << "num solutions: " << countSolutions(b) << std::endl;
+  std::cout << "Attempting to solve" << std::endl;
   if(solveSudoku(b)){
     assert(verifyBoard(b));
     std::cout << std::endl;
@@ -30,8 +31,6 @@ int main(int argc, char *argv[]){
   } else {
     std::cout << "Board not solvable" << std::endl;
   }
-  std::cout << std::endl;
-  printBoard(makeSolved(), std::cout);
   std::cout << "DONE" << std::endl;
   return 0;
 }
