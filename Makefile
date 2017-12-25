@@ -9,8 +9,8 @@ all: $(EXEC)
 clean:
 	rm -f $(EXEC) fake
 
-fake: main.cpp solver.cpp solver.hpp board.cpp board.hpp generator.cpp generator.hpp
-	$(CXX) $(CXXFLAGS) main.cpp generator.cpp solver.cpp board.cpp $(LIBS) -o fake
+fake: main.cpp solver.cpp solver.hpp board.cpp board.hpp generator.cpp generator.hpp SquareGenerator.hpp SnakeGenerator.cpp SnakeGenerator.hpp
+	$(CXX) $(CXXFLAGS) main.cpp generator.cpp solver.cpp SnakeGenerator.cpp board.cpp $(LIBS) -o fake
 
 .PHONY: all clean
 

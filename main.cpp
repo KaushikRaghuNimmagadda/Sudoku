@@ -31,6 +31,11 @@ int main(int argc, char *argv[]){
   } else {
     std::cout << "Board not solvable" << std::endl;
   }
+  Board m = makeSudoku(EASY);
+  std::cout << "MAKING NEW BOARD" << std::endl;
+  std::ofstream ifs2;
+  ifs2.open("new.txt", std::ofstream::trunc);
+  printBoard(m, ifs2);
   std::cout << "DONE" << std::endl;
   return 0;
 }

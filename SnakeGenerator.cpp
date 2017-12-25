@@ -16,15 +16,15 @@ std::pair<int, int> SnakeGenerator::nextSquare(){
     int newCol;
     int newRow;
     if(square.first % 2 == 0){
-      // on an even row, going left to right
-      newCol = (square.second == 0) ? square.second : square.second + 1;
+      // on an even row, going right to left
+      newCol = (square.second == 0) ? square.second : square.second - 1;
     } else {
-      // on an odd row, going right to left
-      newCol = (square.second == 8) ? square.second : square.second - 1;
+      // on an odd row, going left to right
+      newCol = (square.second == 8) ? square.second : square.second + 1;
     }
     // if our column hasn't changed, we must increment the row. Otherwise
     // the row remains the same.
-    newRow = (square.second == tmp.second) ? square.first + 1 : square.second;
+    newRow = (newCol == square.second) ? square.first + 1 : square.first;
     square = std::make_pair(newRow, newCol);
   }
   return tmp;
