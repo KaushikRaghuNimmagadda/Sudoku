@@ -6,13 +6,12 @@ LIBS = -I/usr/local/boost_1_66_0
 
 SOLVER_DEPS = solver_main.cpp solver.cpp solver.hpp board.cpp board.hpp
 
-GENERATOR_DEPS = generator_main.cpp generator.cpp generator.hpp solver.cpp solver.hpp board.cpp board.hpp SquareGenerator.hpp SnakeGenerator.cpp SnakeGenerator.hpp
-
+GENERATOR_DEPS = generator_main.cpp generator.cpp generator.hpp solver.cpp solver.hpp board.cpp board.hpp SquareGenerator.hpp SnakeGenerator.cpp SnakeGenerator.hpp RandomSquareGenerator.cpp RandomSquareGenerator.hpp
 
 all: $(EXECS)
 
 clean:
-	rm -f $(EXECS) fake
+	rm -f $(EXECS)
 
 .PHONY: all clean
 

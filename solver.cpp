@@ -122,7 +122,6 @@ int inBox(Board board, loc location, int val){
   return 0;
 }
 
-
 int verifyBoard(Board board){
   for(int i = 0; i < DIM; i ++){
     for(int j = 0; j < DIM; j ++){

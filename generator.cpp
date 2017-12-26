@@ -2,15 +2,10 @@
 #include "solver.hpp"
 #include "SquareGenerator.hpp"
 #include "SnakeGenerator.hpp"
+#include "RandomSquareGenerator.hpp"
 #include "assert.h"
 
 #define MIN(a,b) ((a) < (b) ? a : b)
-
-Board makeEasy();
-
-Board makeMedium();
-
-Board makeHard();
 
 void digHoles(Board& b, SquareGenerator& gen);
 
@@ -18,8 +13,29 @@ bool canDig(Board& b, std::pair<int, int> square);
 
 Board makeSudoku(Difficulty dif){
   Board b = makeSolved();
-  SnakeGenerator gen = SnakeGenerator();
-  digHoles(b, gen);
+  switch (dif) {
+  case EASY:
+    {
+      RandomSquareGenerator r = RandomSquareGenerator();
+      digHoles(b, r);
+      break;
+    }
+  case MEDIUM:
+    {
+      RandomSquareGenerator r = RandomSquareGenerator();
+      digHoles(b, r);
+      break;
+    }
+  case HARD:
+    {
+      SnakeGenerator s = SnakeGenerator();
+      digHoles(b, s);
+      break;
+    }
+  default:
+    std::cerr << "ERROR: Invalid enum passed to makesudoku: " << dif << std::endl;
+    exit(1);
+  }
   return b;
 }
 
