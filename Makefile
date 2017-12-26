@@ -1,21 +1,23 @@
 CXX = g++
 CXXFLAGS = -g -std=c++11
-EXEC = solver
+EXECS = solver generator
 
 LIBS = -I/usr/local/boost_1_66_0
 
-all: $(EXEC)
+SOLVER_DEPS = solver_main.cpp solver.cpp solver.hpp board.cpp board.hpp
+
+GENERATOR_DEPS = generator_main.cpp generator.cpp generator.hpp solver.cpp solver.hpp board.cpp board.hpp SquareGenerator.hpp SnakeGenerator.cpp SnakeGenerator.hpp
+
+
+all: $(EXECS)
 
 clean:
-	rm -f $(EXEC) fake
-
-fake: main.cpp solver.cpp solver.hpp board.cpp board.hpp generator.cpp generator.hpp SquareGenerator.hpp SnakeGenerator.cpp SnakeGenerator.hpp
-	$(CXX) $(CXXFLAGS) main.cpp generator.cpp solver.cpp SnakeGenerator.cpp board.cpp $(LIBS) -o fake
+	rm -f $(EXECS) fake
 
 .PHONY: all clean
 
-solver: main.o solver.o
-	$(CXX)
+solver: $(SOLVER_DEPS)
+	$(CXX) $(CXXFLAGS) $(SOLVER_DEPS) $(LIBS) -o $@
 
-main.o: main.cpp solver.hpp solver.cpp
-	$(CXX)
+generator: $(GENERATOR_DEPS)
+	$(CXX) $(CXXFLAGS) $(GENERATOR_DEPS) $(LIBS) -o $@

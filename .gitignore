@@ -4,6 +4,7 @@
 *.swp
 fake
 solver
+generator
 cscope.files
 site/
 new.txt

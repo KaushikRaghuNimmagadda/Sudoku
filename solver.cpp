@@ -123,7 +123,6 @@ int inBox(Board board, loc location, int val){
 }
 
 
-
 int verifyBoard(Board board){
   for(int i = 0; i < DIM; i ++){
     for(int j = 0; j < DIM; j ++){
@@ -144,14 +143,4 @@ int verifyBoard(Board board){
   }
   // if we make it through all the cells we can return 1.
   return 1;
-}
-
-int main2(int argc, char *argv[]){
-  if(argc != 2){
-    std::cerr << "Usage: ./solver 'sudoku_file'" << std::endl;
-    std::cerr << "Output will be written to 'solved_sudoku_file'" << std::endl;
-    return 1;
-  }
-  std::cout << "DONE" << std::endl;
-  return 0;
 }
