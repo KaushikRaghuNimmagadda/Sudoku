@@ -31,7 +31,6 @@ Board loadBoard(std::ifstream& source){
   // silly that we go from stringstream to string back to stringstream here,
   // can be simplified.
   std::string str = slurp(source);
-  std::cout << str << std::endl;
   std::stringstream ss(str);
   int i;
   while(ss >> i){
