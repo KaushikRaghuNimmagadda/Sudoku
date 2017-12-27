@@ -2,9 +2,9 @@
 *.out
 *.gch
 *.swp
-fake
 solver
 generator
 cscope.files
 site/
+build/
 new.txt

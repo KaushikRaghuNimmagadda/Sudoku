@@ -1,22 +1,58 @@
-CXX = g++
-CXXFLAGS = -g -std=c++11
-EXECS = solver generator
+CXX := g++
+SOLVE := solver
+GEN := generator
+EXECS := $(SOLVE) $(GEN)
 
-LIBS = -I/usr/local/boost_1_66_0
+MKDIR_P := mkdir -p
 
-SOLVER_DEPS = solver_main.cpp solver.cpp solver.hpp board.cpp board.hpp
+BUILD_DIR := build
+BOARD_SRC := ./board_sources
+SOLVER_SRC := ./solver_sources
+GENERATOR_SRC := ./generator_sources
+EXEC_SUFFIX := _main.cpp # format is rule_main.cpp i.e. generator_main.cpp
 
-GENERATOR_DEPS = generator_main.cpp generator.cpp generator.hpp solver.cpp solver.hpp board.cpp board.hpp SquareGenerator.hpp SnakeGenerator.cpp SnakeGenerator.hpp RandomSquareGenerator.cpp RandomSquareGenerator.hpp
+SOLVE_SRCS := $(shell find $(SOLVER_SRC) -name \*.cpp) # need to escape these wildcards or find produces no output
+GEN_SRCS := $(shell find $(GENERATOR_SRC) -name \*.cpp)
+BOARD_SRCS := $(shell find $(BOARD_SRC) -name \*.cpp)
 
-all: $(EXECS)
+SOLVE_OBJS := $(SOLVE_SRCS:%=$(BUILD_DIR)/%.o)
+GEN_OBJS := $(GEN_SRCS:%=$(BUILD_DIR)/%.o)
+BOARD_OBJS := $(BOARD_SRCS:%=$(BUILD_DIR)/%.o)
+
+SOL_MAIN := solver_main.cpp.o
+GEN_MAIN := generator_main.o
+
+SOLVE_DEPS := $(SOLVE_OBJS:.o=.d)
+GEN_DEPS := $(GEN_OBJS:.o=.d)
+BOARD_DEPS := $(BOARD_OBJS:.o=.d)
+
+
+LIBS := -I/usr/local/boost_1_66_0
+
+INC_DIRS := $(shell find $(SOLVER_SRC) -type d)
+INC_DIRS += $(shell find $(GENERATOR_SRC) -type d)
+INC_DIRS += $(shell find $(BOARD_SRC) -type d)
+INC_FLAGS := $(addprefix -I,$(INC_DIRS))
+
+CXXFLAGS := -g -std=c++11 $(INC_FLAGS) $(LIBS) -MMD -MP
+all: $(addprefix $(BUILD_DIR)/, $(EXECS))
+
+$(SOLVE): $(BUILD_DIR)/$(SOLVE)
+
+$(GEN): $(BUILD_DIR)/$(GEN)
 
 clean:
-	rm -f $(EXECS)
+	rm -rf $(BUILD_DIR)
+
+$(BUILD_DIR)/%.cpp.o: %.cpp
+	$(MKDIR_P) $(dir $@)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 .PHONY: all clean
 
-solver: $(SOLVER_DEPS)
-	$(CXX) $(CXXFLAGS) $(SOLVER_DEPS) $(LIBS) -o $@
+$(BUILD_DIR)/$(SOLVE): $(SOLVE_OBJS) $(BOARD_OBJS)
+	$(CXX) $(CXXFLAGS) $(SOLVE_OBJS) $(BOARD_OBJS) -o $@ $(LDFLAGS)
 
-generator: $(GENERATOR_DEPS)
-	$(CXX) $(CXXFLAGS) $(GENERATOR_DEPS) $(LIBS) -o $@
+$(BUILD_DIR)/$(GEN): $(GEN_OBJS) $(SOLVE_OBJS) $(BOARD_OBJS)
+	echo $(BUILD_DIR)/$(SOLVER_SRC)/$(SOL_MAIN)
+	$(CXX) $(CXXFLAGS) $(GEN_OBJS) $(filter-out $(BUILD_DIR)/$(SOLVER_SRC)/$(SOL_MAIN), $(SOLVE_OBJS)) $(BOARD_OBJS) -o $@ $(LDFLAGS)
