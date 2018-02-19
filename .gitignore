@@ -5,6 +5,7 @@
 solver
 generator
 cscope.files
-site/
+gui/
+cpp-gui/
 build/
 new.txt

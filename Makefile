@@ -9,7 +9,7 @@ BUILD_DIR := build
 BOARD_SRC := ./board_sources
 SOLVER_SRC := ./solver_sources
 GENERATOR_SRC := ./generator_sources
-EXEC_SUFFIX := _main.cpp # format is rule_main.cpp i.e. generator_main.cpp
+EXEC_SUFFIX := _main.cpp.o # format is rule_main.cpp i.e. generator_main.cpp
 
 SOLVE_SRCS := $(shell find $(SOLVER_SRC) -name \*.cpp) # need to escape these wildcards or find produces no output
 GEN_SRCS := $(shell find $(GENERATOR_SRC) -name \*.cpp)
@@ -19,13 +19,12 @@ SOLVE_OBJS := $(SOLVE_SRCS:%=$(BUILD_DIR)/%.o)
 GEN_OBJS := $(GEN_SRCS:%=$(BUILD_DIR)/%.o)
 BOARD_OBJS := $(BOARD_SRCS:%=$(BUILD_DIR)/%.o)
 
-SOL_MAIN := solver_main.cpp.o
-GEN_MAIN := generator_main.o
+SOL_MAIN := $(SOLVE)$(EXEC_SUFFIX)
+GEN_MAIN := $(GEN)$(EXEC_SUFFIX)
 
 SOLVE_DEPS := $(SOLVE_OBJS:.o=.d)
 GEN_DEPS := $(GEN_OBJS:.o=.d)
 BOARD_DEPS := $(BOARD_OBJS:.o=.d)
-
 
 LIBS := -I/usr/local/boost_1_66_0
 
@@ -54,5 +53,4 @@ $(BUILD_DIR)/$(SOLVE): $(SOLVE_OBJS) $(BOARD_OBJS)
 	$(CXX) $(CXXFLAGS) $(SOLVE_OBJS) $(BOARD_OBJS) -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/$(GEN): $(GEN_OBJS) $(SOLVE_OBJS) $(BOARD_OBJS)
-	echo $(BUILD_DIR)/$(SOLVER_SRC)/$(SOL_MAIN)
 	$(CXX) $(CXXFLAGS) $(GEN_OBJS) $(filter-out $(BUILD_DIR)/$(SOLVER_SRC)/$(SOL_MAIN), $(SOLVE_OBJS)) $(BOARD_OBJS) -o $@ $(LDFLAGS)
