@@ -7,5 +7,7 @@ generator
 cscope.files
 gui/
 cpp-gui/
+sudoku-gui/
+site/
 build/
 new.txt

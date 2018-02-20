@@ -2,6 +2,7 @@
 #include "solver.hpp"
 #include "SquareGenerator.hpp"
 #include "SnakeGenerator.hpp"
+#include "SkipSquareGenerator.hpp"
 #include "RandomSquareGenerator.hpp"
 #include "assert.h"
 
@@ -22,7 +23,7 @@ Board makeSudoku(Difficulty dif){
     }
   case MEDIUM:
     {
-      RandomSquareGenerator r = RandomSquareGenerator();
+      SkipSquareGenerator r = new SkipSquareGenerator(false);
       digHoles(b, r);
       break;
     }
